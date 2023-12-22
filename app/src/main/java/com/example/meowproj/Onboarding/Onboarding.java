@@ -7,12 +7,14 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
 import com.example.meowproj.Adapter.OnboardingAdapter;
+import com.example.meowproj.Dialog.Signin;
 import com.example.meowproj.R;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -29,6 +31,22 @@ public class Onboarding extends AppCompatActivity {
         setContentView(R.layout.activity_onboarding);
         setStatusBarAppearance();
         onBoardingFragment();
+        nextToSigninScreen();
+    }
+
+    private void nextToSigninScreen() {
+        btnSkip = findViewById(R.id.skipBtn);
+        btnSignin = findViewById(R.id.signin_id);
+        View.OnClickListener commonClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Onboarding.this, Signin.class);
+                startActivity(intent);
+            }
+        };
+
+        btnSkip.setOnClickListener(commonClickListener);
+        btnSignin.setOnClickListener(commonClickListener);
     }
 
     private void onBoardingFragment() {

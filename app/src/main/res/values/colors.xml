@@ -8,6 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="alert">#C60D00</color>
+    <color name="success">#4CAF50</color>
+    <color name="warning">#FF5722</color>
+
     <color name="_primary_900">#09031B</color>
     <color name="_primary_800">#10052F</color>
     <color name="_primary_700">#251554</color>
