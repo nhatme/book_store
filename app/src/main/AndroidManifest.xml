@@ -12,9 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Meowproj"
         tools:targetApi="31">
-        <activity android:name=".Onboarding.Onboarding" />
-        <activity android:name=".Dialog.Signin" />
-        <activity 
+        <activity
+            android:name=".HomeScreen.Home"
+            android:exported="false" />
+        <activity
+            android:name=".Onboarding.Onboarding"
+            android:exported="false" />
+        <activity
+            android:name=".Dialog.Signin"
+            android:exported="false" />
+        <activity
             android:name=".Onboarding.SplashScreen"
             android:exported="true">
             <intent-filter>

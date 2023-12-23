@@ -37,5 +37,17 @@
     <string name="terms_policy">By clicking Register, you agree to our Terms and Data Policy.</string>
 
 
+    <string name="home">Home</string>
+    <string name="special_offer">Special Offer</string>
+    <string name="special_vip_offer">Special VIP Offer</string>
+    <string name="discount_25">Discount 25%</string>
+    <string name="discount_50">Discount 50%</string>
+    <string name="discount_99">Discount 99%</string>
+    <string name="order_now">Order Now</string>
+    <string name="explore_now">Explore Now</string>
+    <string name="top_of_week">Top of Week</string>
+    <string name="see_all">See all</string>
+    <string name="the_kite_runner">The Kite Runner</string>
+
 
 </resources>

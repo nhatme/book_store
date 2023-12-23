@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.example.meowproj.HomeScreen.Home;
 import com.example.meowproj.R;
 import com.example.meowproj.databinding.ActivitySigninBinding;
 
@@ -79,7 +80,8 @@ public class Signin extends AppCompatActivity {
                         binding.textInputLayoutEmail.setError("email invalid !");
                         checked = false;
                     } else {
-                        Intent intent = new Intent();
+                        Intent intent = new Intent(Signin.this, Home.class);
+                        startActivity(intent);
                     }
                 }
             }
