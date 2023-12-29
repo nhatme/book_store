@@ -13,13 +13,16 @@
         android:theme="@style/Theme.Meowproj"
         tools:targetApi="31">
         <activity
-            android:name=".HomeScreen.Home"
+            android:name=".HomeScreen.CategoryScreenActivity"
             android:exported="false" />
         <activity
             android:name=".Onboarding.Onboarding"
             android:exported="false" />
         <activity
             android:name=".Dialog.Signin"
+            android:exported="false" />
+        <activity
+            android:name=".HomeScreen.ViewPagerHome"
             android:exported="false" />
         <activity
             android:name=".Onboarding.SplashScreen"

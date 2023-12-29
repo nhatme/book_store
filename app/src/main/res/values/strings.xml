@@ -36,7 +36,7 @@
     <string name="signin_apple">Sign in with Apple</string>
     <string name="terms_policy">By clicking Register, you agree to our Terms and Data Policy.</string>
 
-
+    <!--    stuff-->
     <string name="home">Home</string>
     <string name="special_offer">Special Offer</string>
     <string name="special_vip_offer">Special VIP Offer</string>
@@ -48,6 +48,13 @@
     <string name="top_of_week">Top of Week</string>
     <string name="see_all">See all</string>
     <string name="the_kite_runner">The Kite Runner</string>
+    <string name="vendors">Vendors</string>
+    <string name="authors">Authors</string>
+    <string name="john_freeman">John Freeman</string>
+    <string name="writer">Writer</string>
+    <string name="category">Category</string>
+    <string name="cart">Cart</string>
+    <string name="profile">Profile</string>
 
 
 </resources>

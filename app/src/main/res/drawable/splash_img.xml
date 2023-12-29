@@ -14,16 +14,16 @@
                 android:startX="333"
                 android:startY="-204.69"
                 android:type="linear">
-                <item
+                <itemBook
                     android:color="#FFFFFFFF"
                     android:offset="0" />
-                <item
+                <itemBook
                     android:color="#40FFFFFF"
                     android:offset="0.59" />
-                <item
+                <itemBook
                     android:color="#28FFFFFF"
                     android:offset="0.77" />
-                <item
+                <itemBook
                     android:color="#00FFFFFF"
                     android:offset="1" />
             </gradient>

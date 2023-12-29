@@ -4,20 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.example.meowproj.HomeScreen.Home;
+import com.example.meowproj.HomeScreen.ViewPagerHome;
 import com.example.meowproj.R;
 import com.example.meowproj.databinding.ActivitySigninBinding;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Signin extends AppCompatActivity {
 
@@ -73,17 +69,20 @@ public class Signin extends AppCompatActivity {
                 String password = binding.idPassword.getText().toString();
                 Signin signin = new Signin(email, password);
 
-                if (userEmail.isEmpty()) {
-                    Toast.makeText(Signin.this, "Please enter your email", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (!regExEmail(userEmail)) {
-                        binding.textInputLayoutEmail.setError("email invalid !");
-                        checked = false;
-                    } else {
-                        Intent intent = new Intent(Signin.this, Home.class);
-                        startActivity(intent);
-                    }
-                }
+                Intent intent = new Intent(Signin.this, ViewPagerHome.class);
+                startActivity(intent);
+
+//                if (userEmail.isEmpty()) {
+//                    Toast.makeText(Signin.this, "Please enter your email", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    if (!regExEmail(userEmail)) {
+//                        binding.textInputLayoutEmail.setError("email invalid !");
+//                        checked = false;
+//                    } else {
+//                        Intent intent = new Intent(Signin.this, ViewPagerHome.class);
+//                        startActivity(intent);
+//                    }
+//                }
             }
         });
 

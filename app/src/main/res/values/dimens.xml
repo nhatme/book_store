@@ -2,4 +2,5 @@
 <resources>
     <dimen name="default_stroke_width">2dp</dimen>
     <dimen name="focused_stroke_width">4dp</dimen>
+    <dimen name="spacing">16dp</dimen>
 </resources>
