@@ -22,7 +22,6 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.AuthorView
         this.authorList = authorList;
         notifyDataSetChanged();
     }
-
     @NonNull
     @Override
     public AuthorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

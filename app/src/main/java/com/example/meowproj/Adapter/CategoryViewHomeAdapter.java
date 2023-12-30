@@ -1,31 +1,40 @@
 package com.example.meowproj.Adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meowproj.Model.CategoryViewHome;
+import com.example.meowproj.Model.ItemBook;
 import com.example.meowproj.R;
 
 import java.util.List;
 
 public class CategoryViewHomeAdapter extends RecyclerView.Adapter<CategoryViewHomeAdapter.CategoryViewHolder> {
+    private final IClickItemListener mIClickItemListener;
     private Context mContext;
     private List<CategoryViewHome> mCategoryListViewHome;
+    private AdapterView.OnItemClickListener onItemClickListener;
 
-    public CategoryViewHomeAdapter(Context mContext) {
+    public CategoryViewHomeAdapter(Context mContext, IClickItemListener mIClickItemListener) {
         this.mContext = mContext;
+        this.mIClickItemListener = mIClickItemListener;
     }
 
     public void setData(List<CategoryViewHome> list) {
         this.mCategoryListViewHome = list;
         notifyDataSetChanged();
+    }
+
+    public interface IClickItemListener {
+        void onItemClick(List<ItemBook> itemList);
+        // You can add more parameters or create separate interfaces for vendors and authors
     }
 
     @NonNull
@@ -58,6 +67,13 @@ public class CategoryViewHomeAdapter extends RecyclerView.Adapter<CategoryViewHo
         holder.rcvTopWeek.setAdapter(topWeekAdapter);
         holder.rcvVendor.setAdapter(vendorAdapter);
         holder.rcvAuthor.setAdapter(authorAdapter);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mIClickItemListener.onItemClick(categoryViewHome.getTopWeekList());
+            }
+        });
     }
 
     @Override

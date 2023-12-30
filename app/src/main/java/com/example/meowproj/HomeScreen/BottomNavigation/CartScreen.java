@@ -12,6 +12,10 @@ import androidx.fragment.app.Fragment;
 import com.example.meowproj.R;
 
 public class CartScreen extends Fragment {
+
+    public CartScreen() {
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

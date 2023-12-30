@@ -36,8 +36,8 @@
             android:src="@drawable/ic_notification" />
     </LinearLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewpager_BottomNavigationView"
+    <FrameLayout
+        android:id="@+id/nav_host_fragment_activity_main"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_view_nav"

@@ -9,8 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meowproj.Adapter.CategoryTabItemAdapter;
+import com.example.meowproj.Adapter.TabCategorySelectAdapter;
 import com.example.meowproj.HomeScreen.GridSpacingItemDecoration;
 import com.example.meowproj.Model.ItemBook;
 import com.example.meowproj.R;
@@ -21,12 +24,14 @@ import java.util.List;
 
 public class CategoryScreen extends Fragment {
     private ActivityCategoryBinding binding;
+    private static final String TAG = CategoryScreen.class.getName();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = ActivityCategoryBinding.inflate(inflater, container, false);
         categoryGridLayout();
+        categorySelectedTab();
         return binding.getRoot();
     }
 
@@ -40,6 +45,15 @@ public class CategoryScreen extends Fragment {
 
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
         binding.rcvCategoryTab.addItemDecoration(new GridSpacingItemDecoration(spacingInPixels));
+    }
+
+    private void categorySelectedTab() {
+        // category selected tab
+        TabCategorySelectAdapter tabCategorySelectAdapter = new TabCategorySelectAdapter(getActivity());
+        binding.tabCategorySelect.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
+        String[] data = {"All", "Novels", "Self Love", "Science", "Romantic", "Artist"};
+        tabCategorySelectAdapter.setData(data);
+        binding.tabCategorySelect.setAdapter(tabCategorySelectAdapter);
     }
 
     private List<ItemBook> getListBook() {

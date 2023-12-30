@@ -1,6 +1,7 @@
 package com.example.meowproj.HomeScreen.BottomNavigation;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeScreen extends Fragment {
+    public HomeScreen() {
+    }
+
     private ActivityHomeBinding binding;
     private CategoryViewHomeAdapter categoryViewHomeAdapter;
 
@@ -38,8 +42,14 @@ public class HomeScreen extends Fragment {
     }
 
     private void setHorizontalTopItems() {
-        categoryViewHomeAdapter = new CategoryViewHomeAdapter(getActivity());
-
+        categoryViewHomeAdapter = new CategoryViewHomeAdapter(getActivity(), new CategoryViewHomeAdapter.IClickItemListener() {
+            @Override
+            public void onItemClick(List<ItemBook> itemList) {
+                for (ItemBook item : itemList) {
+                    Log.e("NHATD_EE", item.getPrice());
+                }
+            }
+        });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         binding.rcvHomeCategory.setLayoutManager(linearLayoutManager);
 
@@ -79,6 +89,7 @@ public class HomeScreen extends Fragment {
         listCategoryViewHome.add(new CategoryViewHome(itemBookList, vendorList, authorList));
         return listCategoryViewHome;
     }
+
     private void setViewPager2() {
         SpecialOfferAdapter specialOfferAdapter = new SpecialOfferAdapter(getActivity());
         binding.viewpagerOffer.setAdapter(specialOfferAdapter);
