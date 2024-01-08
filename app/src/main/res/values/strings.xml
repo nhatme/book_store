@@ -57,6 +57,24 @@
     <string name="profile">Profile</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_demo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra dignissim ac ac ac. Nibh et sed ac, eget malesuada.</string>
+    <string name="review">Review</string>
+    <string name="logo">LOGO</string>
+    <string name="favorite">Favorite</string>
+    <string name="thumnail">thumnail</string>
+    <string name="_4_0">(4.0)</string>
+    <string name="_39_99">$39.99</string>
+    <string name="continue_shopping">Continue shopping</string>
+    <string name="view_cart">View cart</string>
+    <string name="wattpad">Wattpad</string>
+    <string name="our_vendors">Our Vendors</string>
+    <string name="vendords">Vendords</string>
+    <string name="books">Books</string>
+    <string name="check_the_authors">Check the authors</string>
+    <string name="american_writer_he_was_the_editor_of_the">American writer he was the editor of the</string>
+    <string name="demo_2">Gunty was born and raised in South Bend, Indiana.She graduated from the University of Notre Dame with a Bachelor of Arts in English and from New York University.</string>
+    <string name="about">About</string>
+    <string name="default_qty">1</string>
 
 
 </resources>

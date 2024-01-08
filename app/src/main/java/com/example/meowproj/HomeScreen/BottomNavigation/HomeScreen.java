@@ -1,7 +1,6 @@
 package com.example.meowproj.HomeScreen.BottomNavigation;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,11 +21,14 @@ import com.example.meowproj.Model.ItemBook;
 import com.example.meowproj.Model.Vendor;
 import com.example.meowproj.R;
 import com.example.meowproj.databinding.ActivityHomeBinding;
+import com.example.meowproj.ui.AuthorDetail.BottomSheetAuthorFragment;
+import com.example.meowproj.ui.TopWeekDetail.BottomSheetTopWeekFragment;
+import com.example.meowproj.ui.VendorDetail.BottomSheetVendorFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeScreen extends Fragment {
+public class HomeScreen extends Fragment implements CategoryViewHomeAdapter.IClickItemListener {
     public HomeScreen() {
     }
 
@@ -42,14 +45,8 @@ public class HomeScreen extends Fragment {
     }
 
     private void setHorizontalTopItems() {
-        categoryViewHomeAdapter = new CategoryViewHomeAdapter(getActivity(), new CategoryViewHomeAdapter.IClickItemListener() {
-            @Override
-            public void onItemClick(List<ItemBook> itemList) {
-                for (ItemBook item : itemList) {
-                    Log.e("NHATD_EE", item.getPrice());
-                }
-            }
-        });
+        categoryViewHomeAdapter = new CategoryViewHomeAdapter(getActivity(), this);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         binding.rcvHomeCategory.setLayoutManager(linearLayoutManager);
 
@@ -79,12 +76,12 @@ public class HomeScreen extends Fragment {
         vendorList.add(new Vendor(R.drawable.lg_vendor6));
 
         List<Author> authorList = new ArrayList<>();
-        authorList.add(new Author(R.drawable.author1, "The Kite Runner", "$14.99"));
-        authorList.add(new Author(R.drawable.author2, "The Kite Runner", "$14.99"));
-        authorList.add(new Author(R.drawable.author3, "The Kite Runner", "$14.99"));
-        authorList.add(new Author(R.drawable.author4, "The Kite Runner", "$14.99"));
-        authorList.add(new Author(R.drawable.author5, "The Kite Runner", "$14.99"));
-        authorList.add(new Author(R.drawable.author6, "The Kite Runner", "$14.99"));
+        authorList.add(new Author(R.drawable.author1, "John Freeman", "Writer", ""));
+        authorList.add(new Author(R.drawable.author2, "Tess Gunty", "Novelist", ""));
+        authorList.add(new Author(R.drawable.author3, "Richard Perston", "Writer", ""));
+        authorList.add(new Author(R.drawable.author4, "The Kite Runner", "Novelists", ""));
+        authorList.add(new Author(R.drawable.author5, "The Kite Runner", "Playwrights", ""));
+        authorList.add(new Author(R.drawable.author6, "The Kite Runner", "Journalists", ""));
 
         listCategoryViewHome.add(new CategoryViewHome(itemBookList, vendorList, authorList));
         return listCategoryViewHome;
@@ -95,5 +92,27 @@ public class HomeScreen extends Fragment {
         binding.viewpagerOffer.setAdapter(specialOfferAdapter);
         binding.viewpagerOffer.setPageTransformer(new DepthPageTransformer());
         binding.circleOffer.setViewPager(binding.viewpagerOffer);
+    }
+
+
+    @Override
+    public void onShowBottomSheetTopWeek() {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        BottomSheetTopWeekFragment bottomSheetFragment = new BottomSheetTopWeekFragment();
+        bottomSheetFragment.show(fragmentManager, bottomSheetFragment.getTag());
+    }
+
+    @Override
+    public void onShowBottomSheetVendor() {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        BottomSheetVendorFragment bottomSheetFragment = new BottomSheetVendorFragment();
+        bottomSheetFragment.show(fragmentManager, bottomSheetFragment.getTag());
+    }
+
+    @Override
+    public void onShowBottomSheetAuthor() {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        BottomSheetAuthorFragment bottomSheetFragment = new BottomSheetAuthorFragment();
+        bottomSheetFragment.show(fragmentManager, bottomSheetFragment.getTag());
     }
 }

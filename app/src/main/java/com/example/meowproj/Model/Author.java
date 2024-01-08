@@ -1,12 +1,13 @@
 package com.example.meowproj.Model;
 public class Author {
     private int resourceId;
-    private String author_name, author_Occup;
+    private String author_name, author_Occup, description;
 
-    public Author(int resourceId, String author_name, String author_Occup) {
+    public Author(int resourceId, String author_name, String author_Occup, String description) {
         this.resourceId = resourceId;
         this.author_name = author_name;
         this.author_Occup = author_Occup;
+        this.description = description;
     }
 
     public int getResourceId() {
@@ -31,5 +32,13 @@ public class Author {
 
     public void setAuthor_Occup(String author_Occup) {
         this.author_Occup = author_Occup;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

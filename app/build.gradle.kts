@@ -32,6 +32,23 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    sourceSets {
+        getByName("main") {
+            res {
+                srcDirs(
+                    "src\\main\\res",
+                    "src\\main\\res\\layouts\\home",
+                    "src\\main\\res\\layouts\\category",
+                    "src\\main\\res\\layouts\\profile",
+                    "src\\main\\res\\layouts\\cart",
+                    "src\\main\\res\\layouts\\home\\layouts",
+                    "src\\main\\res\\layouts\\home\\layouts\\vendor",
+                    "src\\main\\res\\layouts\\home\\layouts\\author",
+                    "src\\main\\res\\layouts\\home\\layouts\\topweek", "src\\main\\res", "src\\main\\res\\layouts\\common"
+                )
+            }
+        }
+    }
 }
 
 dependencies {
@@ -45,6 +62,7 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+//    implementation("com.android.databinding:viewbinding:4.0.1")
 
     //circle dots
     implementation("me.relex:circleindicator:2.1.6")

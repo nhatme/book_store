@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meowproj.Adapter.CategoryTabItemAdapter;
-import com.example.meowproj.Adapter.TabCategorySelectAdapter;
 import com.example.meowproj.HomeScreen.GridSpacingItemDecoration;
 import com.example.meowproj.Model.ItemBook;
 import com.example.meowproj.R;
 import com.example.meowproj.databinding.ActivityCategoryBinding;
+import com.example.meowproj.ui.common.TabLayoutAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,11 +49,11 @@ public class CategoryScreen extends Fragment {
 
     private void categorySelectedTab() {
         // category selected tab
-        TabCategorySelectAdapter tabCategorySelectAdapter = new TabCategorySelectAdapter(getActivity());
+        TabLayoutAdapter tabLayoutAdapter = new TabLayoutAdapter(getActivity());
         binding.tabCategorySelect.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
-        String[] data = {"All", "Novels", "Self Love", "Science", "Romantic", "Artist"};
-        tabCategorySelectAdapter.setData(data);
-        binding.tabCategorySelect.setAdapter(tabCategorySelectAdapter);
+        String[] data = {"All", "Novels", "Self Love", "Science", "Romantic", "Nhat"};
+        tabLayoutAdapter.setData(data);
+        binding.tabCategorySelect.setAdapter(tabLayoutAdapter);
     }
 
     private List<ItemBook> getListBook() {

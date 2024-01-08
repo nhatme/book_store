@@ -1,5 +1,6 @@
 package com.example.meowproj.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meowproj.Model.ItemBook;
 import com.example.meowproj.R;
+import com.example.meowproj.databinding.ActivityHomeTopWeekBinding;
 
 import java.util.List;
 
 public class TopWeekAdapter extends RecyclerView.Adapter<TopWeekAdapter.TopWeekViewHolder> {
+    private ActivityHomeTopWeekBinding binding;
     private List<ItemBook> mItemBooks;
+    private OnItemClickListener mItemClickListener;
+
+    // Interface for item click events
+    public interface OnItemClickListener {
+        void onItemClick(ItemBook item);
+    }
+
+    // Method to set the click listener
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mItemClickListener = listener;
+    }
 
     public void setData(List<ItemBook> list) {
         this.mItemBooks = list;
@@ -25,8 +39,8 @@ public class TopWeekAdapter extends RecyclerView.Adapter<TopWeekAdapter.TopWeekV
     @NonNull
     @Override
     public TopWeekViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_home_top_week, parent, false);
-        return new TopWeekViewHolder(view);
+        binding = ActivityHomeTopWeekBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new TopWeekViewHolder(binding);
     }
 
     @Override
@@ -39,6 +53,16 @@ public class TopWeekAdapter extends RecyclerView.Adapter<TopWeekAdapter.TopWeekV
         holder.imgItem.setImageResource(itemBook.getResourceId());
         holder.tvTitle.setText(itemBook.getTitle());
         holder.tvPrice.setText(itemBook.getPrice());
+
+        // Set click listener on the item view
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mItemClickListener != null) {
+                    mItemClickListener.onItemClick(itemBook);
+                }
+            }
+        });
     }
 
     @Override
@@ -53,11 +77,11 @@ public class TopWeekAdapter extends RecyclerView.Adapter<TopWeekAdapter.TopWeekV
         private ImageView imgItem;
         private TextView tvTitle, tvPrice;
 
-        public TopWeekViewHolder(@NonNull View itemView) {
-            super(itemView);
-            imgItem = itemView.findViewById(R.id.item_img);
-            tvTitle = itemView.findViewById(R.id.item_title);
-            tvPrice = itemView.findViewById(R.id.item_price);
+        public TopWeekViewHolder(@NonNull ActivityHomeTopWeekBinding binding) {
+            super(binding.getRoot());
+            imgItem = binding.itemImg;
+            tvTitle = binding.itemTitle;
+            tvPrice = binding.itemPrice;
         }
     }
 }

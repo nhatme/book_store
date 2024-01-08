@@ -10,23 +10,34 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meowproj.Model.Author;
-import com.example.meowproj.R;
+import com.example.meowproj.databinding.ActivityHomeAuthorBinding;
 
 import java.util.List;
 
 public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.AuthorViewHolder> {
-
+    private ActivityHomeAuthorBinding binding;
     private List<Author> authorList;
+    private OnItemClickListener onItemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(Author author);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     public void setData(List<Author> authorList) {
         this.authorList = authorList;
         notifyDataSetChanged();
     }
+
     @NonNull
     @Override
     public AuthorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_home_author, parent, false);
-        return new AuthorViewHolder(view);
+        binding = ActivityHomeAuthorBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+
+        return new AuthorViewHolder(binding);
     }
 
     @Override
@@ -39,6 +50,15 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.AuthorView
         holder.imageView.setImageResource(author.getResourceId());
         holder.author_name.setText(author.getAuthor_name());
         holder.author_Occup.setText(author.getAuthor_Occup());
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(author);
+                }
+            }
+        });
     }
 
     @Override
@@ -53,11 +73,11 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.AuthorView
         private ImageView imageView;
         private TextView author_name, author_Occup;
 
-        public AuthorViewHolder(@NonNull View itemView) {
-            super(itemView);
-            imageView = itemView.findViewById(R.id.author_img);
-            author_name = itemView.findViewById(R.id.author_name);
-            author_Occup = itemView.findViewById(R.id.author_Occup);
+        public AuthorViewHolder(@NonNull ActivityHomeAuthorBinding binding) {
+            super(binding.getRoot());
+            imageView = binding.authorImg;
+            author_name = binding.authorName;
+            author_Occup = binding.authorOccup;
         }
     }
 }

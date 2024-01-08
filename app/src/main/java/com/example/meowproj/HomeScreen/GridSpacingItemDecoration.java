@@ -20,9 +20,9 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
         int position = parent.getChildAdapterPosition(view);
         int spanCount = ((GridLayoutManager) parent.getLayoutManager()).getSpanCount();
         int column = position % spanCount;
-        Log.d("NHATD", "Position: " + Integer.toString(position));
-        Log.d("NHATD", "Spancount: " + Integer.toString(spanCount));
-        Log.d("NHATD", "column: " + Integer.toString(column));
+//        Log.d("NHATD", "Position: " + Integer.toString(position));
+//        Log.d("NHATD", "Spancount: " + Integer.toString(spanCount));
+//        Log.d("NHATD", "column: " + Integer.toString(column));
         // Only add spacing between items, not on the outer edges
         outRect.left = column * spacing / spanCount;
         outRect.right = spacing - (column + 1) * spacing / spanCount;

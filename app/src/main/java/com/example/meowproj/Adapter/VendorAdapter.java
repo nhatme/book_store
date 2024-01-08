@@ -1,5 +1,6 @@
 package com.example.meowproj.Adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meowproj.Model.Vendor;
 import com.example.meowproj.R;
+import com.example.meowproj.databinding.ActivityHomeVendorBinding;
 
 import java.util.List;
 
 public class VendorAdapter extends RecyclerView.Adapter<VendorAdapter.VendorViewHolder> {
+    private ActivityHomeVendorBinding binding;
     private List<Vendor> vendorList;
+
+    private OnItemClickListener onItemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(Vendor vendor);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     public void setData(List<Vendor> vendorList) {
         this.vendorList = vendorList;
@@ -24,8 +37,9 @@ public class VendorAdapter extends RecyclerView.Adapter<VendorAdapter.VendorView
     @NonNull
     @Override
     public VendorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_home_vendor, parent, false);
-        return new VendorViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        binding = ActivityHomeVendorBinding.inflate(inflater, parent, false);
+        return new VendorViewHolder(binding);
     }
 
     @Override
@@ -36,6 +50,14 @@ public class VendorAdapter extends RecyclerView.Adapter<VendorAdapter.VendorView
         }
 
         holder.imageView.setImageResource(vendor.getResourceId());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(vendor);
+                }
+            }
+        });
     }
 
     @Override
@@ -49,9 +71,9 @@ public class VendorAdapter extends RecyclerView.Adapter<VendorAdapter.VendorView
     public class VendorViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
 
-        public VendorViewHolder(@NonNull View itemView) {
-            super(itemView);
-            imageView = itemView.findViewById(R.id.logo_vendor);
+        public VendorViewHolder(@NonNull ActivityHomeVendorBinding binding) {
+            super(binding.getRoot());
+            imageView = binding.logoVendor;
         }
     }
 }

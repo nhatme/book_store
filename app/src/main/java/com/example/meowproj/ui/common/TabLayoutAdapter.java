@@ -1,21 +1,21 @@
-package com.example.meowproj.Adapter;
+package com.example.meowproj.ui.common;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.meowproj.R;
+import com.example.meowproj.databinding.TabLayoutBinding;
 
-public class TabCategorySelectAdapter extends RecyclerView.Adapter<TabCategorySelectAdapter.TabCategorySelectViewHolder> {
+public class TabLayoutAdapter extends RecyclerView.Adapter<TabLayoutAdapter.TabCategorySelectViewHolder> {
     private Context context;
     private String[] selectedList;
+    private TabLayoutBinding binding;
 
-    public TabCategorySelectAdapter(Context context) {
+    public TabLayoutAdapter(Context context) {
         this.context = context;
     }
 
@@ -27,8 +27,9 @@ public class TabCategorySelectAdapter extends RecyclerView.Adapter<TabCategorySe
     @NonNull
     @Override
     public TabCategorySelectViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tab_category_selected, parent, false);
-        return new TabCategorySelectViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        binding = TabLayoutBinding.inflate(inflater, parent, false);
+        return new TabCategorySelectViewHolder(binding);
     }
 
     @Override
@@ -51,9 +52,9 @@ public class TabCategorySelectAdapter extends RecyclerView.Adapter<TabCategorySe
     public class TabCategorySelectViewHolder extends RecyclerView.ViewHolder {
         private TextView nameSelected;
 
-        public TabCategorySelectViewHolder(@NonNull View itemView) {
-            super(itemView);
-            nameSelected = itemView.findViewById(R.id.tvCategorySelected);
+        public TabCategorySelectViewHolder(@NonNull TabLayoutBinding binding) {
+            super(binding.getRoot());
+            nameSelected = binding.tvTab;
         }
     }
 }

@@ -36,5 +36,7 @@
 
     <color name="item_unslected">#A6A6A6</color>
     <color name="_others_red">#EF5A56</color>
+    <color name="yellow_star">#F5BE00</color>
+
 
 </resources>

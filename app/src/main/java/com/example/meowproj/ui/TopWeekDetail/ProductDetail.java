@@ -1,12 +1,11 @@
-package com.example.meowproj.ui.ProductDetail;
+package com.example.meowproj.ui.TopWeekDetail;
 
 public class ProductDetail {
-    private int imgResourceId, logoResourceId;
+    private int imgResourceId, logoResourceId, review;
     private String title, description;
     private boolean isFavorite;
-    private float review;
 
-    public ProductDetail(int imgResourceId, int logoResourceId, String title, String description, boolean isFavorite, float review) {
+    public ProductDetail(int imgResourceId, int logoResourceId, String title, String description, boolean isFavorite, int review) {
         this.imgResourceId = imgResourceId;
         this.logoResourceId = logoResourceId;
         this.title = title;
@@ -59,7 +58,7 @@ public class ProductDetail {
         return review;
     }
 
-    public void setReview(float review) {
+    public void setReview(int review) {
         this.review = review;
     }
 }

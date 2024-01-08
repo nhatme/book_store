@@ -22,7 +22,7 @@ public class SplashScreen extends AppCompatActivity {
             Intent intent = new Intent(this, Onboarding.class);
             startActivity(intent);
             finish();
-        }, 2000);
+        }, 800);
     }
 
     public void setStatusBarAppearance() {
