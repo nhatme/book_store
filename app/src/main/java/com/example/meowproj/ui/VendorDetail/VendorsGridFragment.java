@@ -3,6 +3,7 @@ package com.example.meowproj.ui.VendorDetail;
 import android.content.res.Resources;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.meowproj.ui.Decoration.GridSpacingItemDecoration;
 import com.example.meowproj.R;
 import com.example.meowproj.databinding.FragmentVendorsGridBinding;
 import com.example.meowproj.ui.common.TabLayoutAdapter;
@@ -35,6 +37,7 @@ public class VendorsGridFragment extends Fragment {
         binding.rcvVendorsGrid.setLayoutManager(gridLayoutManager);
         vendorGridAdapter.setData(getListVendors());
         binding.rcvVendorsGrid.setAdapter(vendorGridAdapter);
+        binding.rcvVendorsGrid.addItemDecoration(new GridSpacingItemDecoration(50));
         vendorGridSelectedTab();
 
         return view;
@@ -47,9 +50,9 @@ public class VendorsGridFragment extends Fragment {
         String[] data = {"All", "Books", "Poems", "Special for you", "Stationary", "Poems"};
         tabLayoutAdapter.setData(data);
         binding.rcvTablayout.setAdapter(tabLayoutAdapter);
-
     }
 
+    @NonNull
     private List<VendorsItem> getListVendors() {
         List<VendorsItem> vendorsItemList = new ArrayList<>();
         Resources resources = getResources();

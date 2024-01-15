@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meowproj.Model.ItemBook;
 import com.example.meowproj.R;
+import com.example.meowproj.databinding.ItemCategoryBinding;
 
 import java.util.List;
 
 public class CategoryTabItemAdapter extends RecyclerView.Adapter<CategoryTabItemAdapter.CategoryTabItemViewHolder> {
-
+    private ItemCategoryBinding binding;
     private Context mContext;
     private List<ItemBook> mListBook;
 
@@ -32,9 +33,9 @@ public class CategoryTabItemAdapter extends RecyclerView.Adapter<CategoryTabItem
     @NonNull
     @Override
     public CategoryTabItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category, parent, false);
-        return new CategoryTabItemViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        binding = ItemCategoryBinding.inflate(inflater, parent, false);
+        return new CategoryTabItemViewHolder(binding);
     }
 
     @Override
@@ -60,11 +61,11 @@ public class CategoryTabItemAdapter extends RecyclerView.Adapter<CategoryTabItem
         private ImageView imgProd;
         private TextView nameProd, priceProd;
 
-        public CategoryTabItemViewHolder(@NonNull View itemView) {
-            super(itemView);
-            imgProd = itemView.findViewById(R.id.img_category);
-            nameProd = itemView.findViewById(R.id.category_name_prod);
-            priceProd = itemView.findViewById(R.id.category_price_prod);
+        public CategoryTabItemViewHolder(@NonNull ItemCategoryBinding binding) {
+            super(binding.getRoot());
+            imgProd = binding.imgCategory;
+            nameProd = binding.categoryNameProd;
+            priceProd = binding.categoryPriceProd;
 
         }
     }

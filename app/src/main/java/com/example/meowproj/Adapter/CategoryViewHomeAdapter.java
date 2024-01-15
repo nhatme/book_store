@@ -2,6 +2,7 @@ package com.example.meowproj.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -41,7 +42,7 @@ public class CategoryViewHomeAdapter extends RecyclerView.Adapter<CategoryViewHo
     public interface IClickItemListener {
         void onShowBottomSheetTopWeek();
 
-        void onShowBottomSheetVendor();
+        void onShowDialogVendorModal();
 
         void onShowBottomSheetAuthor();
     }
@@ -98,7 +99,7 @@ public class CategoryViewHomeAdapter extends RecyclerView.Adapter<CategoryViewHo
             @Override
             public void onItemClick(Vendor vendor) {
                 if (iClickItemListener != null) {
-                    iClickItemListener.onShowBottomSheetVendor();
+                    iClickItemListener.onShowDialogVendorModal();
                 }
             }
         });
@@ -113,7 +114,12 @@ public class CategoryViewHomeAdapter extends RecyclerView.Adapter<CategoryViewHo
         });
 
 
-        holder.see_more_TopWeek.setOnClickListener(v -> replaceFragment(new TopWeekGridFragment()));
+        holder.see_more_TopWeek.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CategoryViewHomeAdapter.this.replaceFragment(new TopWeekGridFragment());
+            }
+        });
 
         holder.see_more_Vendor.setOnClickListener(v -> replaceFragment(new VendorsGridFragment()));
 

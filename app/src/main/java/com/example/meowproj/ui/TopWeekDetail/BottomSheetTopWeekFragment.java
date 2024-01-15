@@ -22,7 +22,6 @@ public class BottomSheetTopWeekFragment extends BottomSheetDialogFragment {
     public BottomSheetTopWeekFragment() {
         // Required empty public constructor
     }
-
     private int qty;
 
     @Override

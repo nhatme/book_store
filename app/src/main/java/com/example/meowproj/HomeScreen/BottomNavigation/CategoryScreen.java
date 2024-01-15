@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meowproj.Adapter.CategoryTabItemAdapter;
-import com.example.meowproj.HomeScreen.GridSpacingItemDecoration;
+import com.example.meowproj.ui.Decoration.GridSpacingItemDecoration;
 import com.example.meowproj.Model.ItemBook;
 import com.example.meowproj.R;
 import com.example.meowproj.databinding.ActivityCategoryBinding;

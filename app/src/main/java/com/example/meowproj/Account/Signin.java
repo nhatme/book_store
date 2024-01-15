@@ -1,4 +1,4 @@
-package com.example.meowproj.Dialog;
+package com.example.meowproj.Account;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.example.meowproj.HomeScreen;
+package com.example.meowproj.ui.Decoration;
 
 import androidx.viewpager2.widget.ViewPager2;
 

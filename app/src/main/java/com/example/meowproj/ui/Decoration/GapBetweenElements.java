@@ -1,4 +1,4 @@
-package com.example.meowproj.HomeScreen;
+package com.example.meowproj.ui.Decoration;
 
 import android.graphics.Rect;
 import android.view.View;

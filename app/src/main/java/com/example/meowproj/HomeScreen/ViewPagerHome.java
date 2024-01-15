@@ -57,12 +57,12 @@ public class ViewPagerHome extends AppCompatActivity {
 
     public void replaceFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(
-                R.anim.slide_in_right,  // enter
-                R.anim.slide_out_left,  // exit
-                R.anim.slide_in_left,   // popEnter
-                R.anim.slide_out_right  // popExit
-        );
+//        fragmentTransaction.setCustomAnimations(
+//                R.anim.slide_in_right,  // enter
+//                R.anim.slide_out_left,  // exit
+//                R.anim.slide_in_left,   // popEnter
+//                R.anim.slide_out_right  // popExit
+//        );
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
             Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
             if (currentFragment instanceof HomeScreen) {
@@ -86,6 +86,13 @@ public class ViewPagerHome extends AppCompatActivity {
         });
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment);
+        fragmentTransaction.commit();
+    }
+
+    public void replaceFragmentFullPage(Fragment fragment){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, fragment); // the id is where layout do you want to replace ?
         fragmentTransaction.commit();
     }
 

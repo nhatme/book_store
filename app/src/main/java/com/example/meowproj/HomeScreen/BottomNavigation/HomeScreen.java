@@ -1,9 +1,16 @@
 package com.example.meowproj.HomeScreen.BottomNavigation;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meowproj.Adapter.CategoryViewHomeAdapter;
 import com.example.meowproj.Adapter.SpecialOfferAdapter;
-import com.example.meowproj.HomeScreen.DepthPageTransformer;
+import com.example.meowproj.ui.Decoration.DepthPageTransformer;
 import com.example.meowproj.Model.Author;
 import com.example.meowproj.Model.CategoryViewHome;
 import com.example.meowproj.Model.ItemBook;
@@ -23,7 +30,6 @@ import com.example.meowproj.R;
 import com.example.meowproj.databinding.ActivityHomeBinding;
 import com.example.meowproj.ui.AuthorDetail.BottomSheetAuthorFragment;
 import com.example.meowproj.ui.TopWeekDetail.BottomSheetTopWeekFragment;
-import com.example.meowproj.ui.VendorDetail.BottomSheetVendorFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +100,6 @@ public class HomeScreen extends Fragment implements CategoryViewHomeAdapter.ICli
         binding.circleOffer.setViewPager(binding.viewpagerOffer);
     }
 
-
     @Override
     public void onShowBottomSheetTopWeek() {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -103,10 +108,24 @@ public class HomeScreen extends Fragment implements CategoryViewHomeAdapter.ICli
     }
 
     @Override
-    public void onShowBottomSheetVendor() {
+    public void onShowDialogVendorModal() {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        BottomSheetVendorFragment bottomSheetFragment = new BottomSheetVendorFragment();
-        bottomSheetFragment.show(fragmentManager, bottomSheetFragment.getTag());
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_vendor_modal);
+
+        Window window = dialog.getWindow();
+        if (window == null){
+            return;
+        }
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Button btn1 = dialog.findViewById(R.id.entered_dismiss);
+        Button btn2 = dialog.findViewById(R.id.entered_explore);
+        btn1.setOnClickListener(v -> dialog.dismiss());
+        btn2.setOnClickListener(v -> Toast.makeText(getActivity(), "No data", Toast.LENGTH_SHORT).show());
+        dialog.show();
     }
 
     @Override

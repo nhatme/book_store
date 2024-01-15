@@ -14,7 +14,7 @@ import android.view.Window;
 import android.widget.Button;
 
 import com.example.meowproj.Adapter.OnboardingAdapter;
-import com.example.meowproj.Dialog.Signin;
+import com.example.meowproj.Account.Signin;
 import com.example.meowproj.R;
 
 import me.relex.circleindicator.CircleIndicator;
