@@ -1,6 +1,7 @@
 package com.example.meowproj.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.meowproj.HomeScreen.ViewPagerHome;
+import com.example.meowproj.HomeScreen.MainActivity;
 import com.example.meowproj.Model.Author;
 import com.example.meowproj.Model.CategoryViewHome;
 import com.example.meowproj.Model.ItemBook;
@@ -40,7 +41,7 @@ public class CategoryViewHomeAdapter extends RecyclerView.Adapter<CategoryViewHo
     }
 
     public interface IClickItemListener {
-        void onShowBottomSheetTopWeek();
+        void onShowBottomSheetTopWeek(String itemId);
 
         void onShowDialogVendorModal();
 
@@ -71,47 +72,53 @@ public class CategoryViewHomeAdapter extends RecyclerView.Adapter<CategoryViewHo
         holder.rcvVendor.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.HORIZONTAL, false));
         holder.rcvAuthor.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.HORIZONTAL, false));
 
-        TopWeekAdapter topWeekAdapter = new TopWeekAdapter();
-        topWeekAdapter.setData(categoryViewHome.getTopWeekList());
+        Log.d("CategoryViewHomeAdapter", "mContext value: " + mContext);
 
-        VendorAdapter vendorAdapter = new VendorAdapter();
-        vendorAdapter.setData(categoryViewHome.getVendorList());
+        if (mContext != null) {
 
-        AuthorAdapter authorAdapter = new AuthorAdapter();
-        authorAdapter.setData(categoryViewHome.getAuthorList());
+            TopWeekAdapter topWeekAdapter = new TopWeekAdapter(mContext);
+            topWeekAdapter.setData(categoryViewHome.getTopWeekList());
 
-        holder.rcvTopWeek.setAdapter(topWeekAdapter);
-        holder.rcvVendor.setAdapter(vendorAdapter);
-        holder.rcvAuthor.setAdapter(authorAdapter);
+            VendorAdapter vendorAdapter = new VendorAdapter();
+            vendorAdapter.setData(categoryViewHome.getVendorList());
 
-        topWeekAdapter.setOnItemClickListener(new TopWeekAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(ItemBook item) {
+            AuthorAdapter authorAdapter = new AuthorAdapter();
+            authorAdapter.setData(categoryViewHome.getAuthorList());
 
-                // Show BottomSheetFragment
-                if (iClickItemListener != null) {
-                    iClickItemListener.onShowBottomSheetTopWeek();
+            holder.rcvTopWeek.setAdapter(topWeekAdapter);
+            holder.rcvVendor.setAdapter(vendorAdapter);
+            holder.rcvAuthor.setAdapter(authorAdapter);
+
+            topWeekAdapter.setOnItemClickListener(new TopWeekAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(ItemBook item, String itemId) {
+
+                    if (iClickItemListener != null) {
+                        iClickItemListener.onShowBottomSheetTopWeek(itemId);
+                        Log.e("OKEds", itemId);
+                    }
                 }
-            }
-        });
+            });
 
-        vendorAdapter.setOnItemClickListener(new VendorAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Vendor vendor) {
-                if (iClickItemListener != null) {
-                    iClickItemListener.onShowDialogVendorModal();
-                }
-            }
-        });
 
-        authorAdapter.setOnItemClickListener(new AuthorAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(Author author) {
-                if (iClickItemListener != null) {
-                    iClickItemListener.onShowBottomSheetAuthor();
+            vendorAdapter.setOnItemClickListener(new VendorAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(Vendor vendor) {
+                    if (iClickItemListener != null) {
+                        iClickItemListener.onShowDialogVendorModal();
+                    }
                 }
-            }
-        });
+            });
+
+            authorAdapter.setOnItemClickListener(new AuthorAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(Author author) {
+                    if (iClickItemListener != null) {
+                        iClickItemListener.onShowBottomSheetAuthor();
+                    }
+                }
+            });
+        }
 
 
         holder.see_more_TopWeek.setOnClickListener(new View.OnClickListener() {
@@ -127,8 +134,8 @@ public class CategoryViewHomeAdapter extends RecyclerView.Adapter<CategoryViewHo
     }
 
     private void replaceFragment(Fragment fragment) {
-        if (mContext instanceof ViewPagerHome) {
-            ViewPagerHome viewPagerHome = (ViewPagerHome) mContext;
+        if (mContext instanceof MainActivity) {
+            MainActivity viewPagerHome = (MainActivity) mContext;
             viewPagerHome.replaceFragment(fragment);
         }
     }

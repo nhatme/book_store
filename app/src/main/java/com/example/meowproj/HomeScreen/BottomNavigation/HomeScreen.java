@@ -21,10 +21,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meowproj.Adapter.CategoryViewHomeAdapter;
 import com.example.meowproj.Adapter.SpecialOfferAdapter;
+import com.example.meowproj.Api.ApiService;
+import com.example.meowproj.Api.Model.Product.Product;
+import com.example.meowproj.Api.Model.Product.RootProduct;
+import com.example.meowproj.Model.ItemBook;
 import com.example.meowproj.ui.Decoration.DepthPageTransformer;
 import com.example.meowproj.Model.Author;
 import com.example.meowproj.Model.CategoryViewHome;
-import com.example.meowproj.Model.ItemBook;
 import com.example.meowproj.Model.Vendor;
 import com.example.meowproj.R;
 import com.example.meowproj.databinding.ActivityHomeBinding;
@@ -34,7 +37,13 @@ import com.example.meowproj.ui.TopWeekDetail.BottomSheetTopWeekFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class HomeScreen extends Fragment implements CategoryViewHomeAdapter.IClickItemListener {
+    private static final String TAG = "NHAT_LOG";
+
     public HomeScreen() {
     }
 
@@ -45,49 +54,78 @@ public class HomeScreen extends Fragment implements CategoryViewHomeAdapter.ICli
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = ActivityHomeBinding.inflate(inflater, container, false);
-        setHorizontalTopItems();
+        callAPI();
         setViewPager2();
         return binding.getRoot();
     }
 
-    private void setHorizontalTopItems() {
+    private void setHorizontalTopItems(List<CategoryViewHome> listCategoryViewHome) {
         categoryViewHomeAdapter = new CategoryViewHomeAdapter(getActivity(), this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         binding.rcvHomeCategory.setLayoutManager(linearLayoutManager);
 
-        categoryViewHomeAdapter.setData(getListCategory());
+        categoryViewHomeAdapter.setData(listCategoryViewHome);
         binding.rcvHomeCategory.setAdapter(categoryViewHomeAdapter);
     }
 
-    private List<CategoryViewHome> getListCategory() {
-        List<CategoryViewHome> listCategoryViewHome = new ArrayList<>();
+    public void callAPI() {
+        ApiService.apiService.getAllProducts().enqueue(new Callback<RootProduct>() {
+            @Override
+            public void onResponse(Call<RootProduct> call, Response<RootProduct> response) {
+                if (response.isSuccessful()) {
+                    RootProduct rootProduct = response.body();
+                    Toast.makeText(getActivity(), "Call API: " + rootProduct.getMessage() + " " + response.code(), Toast.LENGTH_SHORT).show();
+                    List<ItemBook> itemBookList = convertToItemBook(rootProduct);
+                    List<CategoryViewHome> listCategoryViewHome = getListCategory(itemBookList);
+                    setHorizontalTopItems(listCategoryViewHome);
+                } else {
+                    Toast.makeText(getActivity(), "Call API error: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onFailure(@NonNull Call<RootProduct> call, @NonNull Throwable t) {
+                Toast.makeText(getActivity(), "get products error 3 / server offline", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private List<ItemBook> convertToItemBook(RootProduct rootProduct) {
         List<ItemBook> itemBookList = new ArrayList<>();
-        itemBookList.add(new ItemBook(R.drawable.prod1, "The Kite Runner", "$14.99"));
-        itemBookList.add(new ItemBook(R.drawable.prod2, "The NHAT Runner", "$20.99"));
-        itemBookList.add(new ItemBook(R.drawable.prod3, "The NHAT Runner", "$20.99"));
-        itemBookList.add(new ItemBook(R.drawable.prod4, "The Best Runner", "$14.99"));
-        itemBookList.add(new ItemBook(R.drawable.prod3, "The Best Runner", "$14.99"));
-        itemBookList.add(new ItemBook(R.drawable.prod5, "The Kite Meow", "$14.99"));
-        itemBookList.add(new ItemBook(R.drawable.prod2, "The Kite Meow", "$14.99"));
-        itemBookList.add(new ItemBook(R.drawable.prod1, "The Kite Meow", "$14.99"));
+        List<Product> productList = rootProduct.getProducts();
+        for (Product product : productList) {
+            ItemBook itemBook = new ItemBook(
+                    product.getId(),
+                    product.getImageProduct().getSource(),
+                    product.getName(),
+                    String.valueOf(product.getPrice())
+            );
+            itemBookList.add(itemBook);
+        }
+        return itemBookList;
+    }
+
+    private List<CategoryViewHome> getListCategory(List<ItemBook> itemBookList) {
+        final List<CategoryViewHome> listCategoryViewHome = new ArrayList<>();
 
         List<Vendor> vendorList = new ArrayList<>();
         vendorList.add(new Vendor(R.drawable.lg_vendor1));
-        vendorList.add(new Vendor(R.drawable.lg_vendor2));
-        vendorList.add(new Vendor(R.drawable.lg_vendor3));
-        vendorList.add(new Vendor(R.drawable.lg_vendor4));
-        vendorList.add(new Vendor(R.drawable.lg_vendor5));
-        vendorList.add(new Vendor(R.drawable.lg_vendor6));
+        vendorList.add(new Vendor(R.drawable.lg_vendor1));
+        vendorList.add(new Vendor(R.drawable.lg_vendor1));
+        vendorList.add(new Vendor(R.drawable.lg_vendor1));
+        vendorList.add(new Vendor(R.drawable.lg_vendor1));
+        vendorList.add(new Vendor(R.drawable.lg_vendor1));
+        vendorList.add(new Vendor(R.drawable.lg_vendor1));
 
         List<Author> authorList = new ArrayList<>();
         authorList.add(new Author(R.drawable.author1, "John Freeman", "Writer", ""));
-        authorList.add(new Author(R.drawable.author2, "Tess Gunty", "Novelist", ""));
-        authorList.add(new Author(R.drawable.author3, "Richard Perston", "Writer", ""));
-        authorList.add(new Author(R.drawable.author4, "The Kite Runner", "Novelists", ""));
-        authorList.add(new Author(R.drawable.author5, "The Kite Runner", "Playwrights", ""));
-        authorList.add(new Author(R.drawable.author6, "The Kite Runner", "Journalists", ""));
+        authorList.add(new Author(R.drawable.author1, "John Freeman", "Writer", ""));
+        authorList.add(new Author(R.drawable.author1, "John Freeman", "Writer", ""));
+        authorList.add(new Author(R.drawable.author1, "John Freeman", "Writer", ""));
+        authorList.add(new Author(R.drawable.author1, "John Freeman", "Writer", ""));
+        authorList.add(new Author(R.drawable.author1, "John Freeman", "Writer", ""));
+        authorList.add(new Author(R.drawable.author1, "John Freeman", "Writer", ""));
 
         listCategoryViewHome.add(new CategoryViewHome(itemBookList, vendorList, authorList));
         return listCategoryViewHome;
@@ -101,9 +139,9 @@ public class HomeScreen extends Fragment implements CategoryViewHomeAdapter.ICli
     }
 
     @Override
-    public void onShowBottomSheetTopWeek() {
+    public void onShowBottomSheetTopWeek(String itemId) {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        BottomSheetTopWeekFragment bottomSheetFragment = new BottomSheetTopWeekFragment();
+        BottomSheetTopWeekFragment bottomSheetFragment = BottomSheetTopWeekFragment.newInstance(itemId);
         bottomSheetFragment.show(fragmentManager, bottomSheetFragment.getTag());
     }
 
@@ -115,7 +153,7 @@ public class HomeScreen extends Fragment implements CategoryViewHomeAdapter.ICli
         dialog.setContentView(R.layout.dialog_vendor_modal);
 
         Window window = dialog.getWindow();
-        if (window == null){
+        if (window == null) {
             return;
         }
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);

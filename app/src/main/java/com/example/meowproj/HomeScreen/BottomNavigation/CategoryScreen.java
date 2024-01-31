@@ -56,13 +56,15 @@ public class CategoryScreen extends Fragment {
         binding.tabCategorySelect.setAdapter(tabLayoutAdapter);
     }
 
+//    private void
+
     private List<ItemBook> getListBook() {
         List<ItemBook> itemBookList = new ArrayList<>();
-        itemBookList.add(new ItemBook(R.drawable.image1, "The Da vinci Code", "$19.99"));
-        itemBookList.add(new ItemBook(R.drawable.image2, "The Da vinci Code", "$19.99"));
-        itemBookList.add(new ItemBook(R.drawable.image3, "The Da vinci Code", "$19.99"));
-        itemBookList.add(new ItemBook(R.drawable.image2, "The Da vinci Code", "$19.99"));
-        itemBookList.add(new ItemBook(R.drawable.image1, "The Da vinci Code", "$19.99"));
+//        itemBookList.add(new ItemBook(R.drawable.image1, "The Da vinci Code", "$19.99"));
+//        itemBookList.add(new ItemBook(R.drawable.image2, "The Da vinci Code", "$19.99"));
+//        itemBookList.add(new ItemBook(R.drawable.image3, "The Da vinci Code", "$19.99"));
+//        itemBookList.add(new ItemBook(R.drawable.image2, "The Da vinci Code", "$19.99"));
+//        itemBookList.add(new ItemBook(R.drawable.image1, "The Da vinci Code", "$19.99"));
 
         return itemBookList;
     }

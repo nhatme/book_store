@@ -1,21 +1,29 @@
 package com.example.meowproj.Model;
 
 public class ItemBook {
-    private int resourceId;
-    private String title, price;
+    private String id, image, title, price;
 
-    public ItemBook(int resourceId, String title, String price) {
-        this.resourceId = resourceId;
+    public ItemBook(String id, String image, String title, String price) {
+        this.id = id;
+        this.image = image;
         this.title = title;
         this.price = price;
     }
 
-    public int getResourceId() {
-        return resourceId;
+    public String getId() {
+        return id;
     }
 
-    public void setResourceId(int resourceId) {
-        this.resourceId = resourceId;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getTitle() {

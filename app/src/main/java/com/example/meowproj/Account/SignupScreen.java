@@ -1,4 +1,4 @@
 package com.example.meowproj.Account;
 
-public class Signup {
+public class SignupScreen {
 }

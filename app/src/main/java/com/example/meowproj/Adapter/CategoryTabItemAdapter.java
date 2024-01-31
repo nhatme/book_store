@@ -44,7 +44,7 @@ public class CategoryTabItemAdapter extends RecyclerView.Adapter<CategoryTabItem
         if (itemBook == null) {
             return;
         }
-        holder.imgProd.setImageResource(itemBook.getResourceId());
+
         holder.nameProd.setText(itemBook.getTitle());
         holder.priceProd.setText(itemBook.getPrice());
     }

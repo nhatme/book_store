@@ -14,7 +14,7 @@ import android.view.Window;
 import android.widget.Button;
 
 import com.example.meowproj.Adapter.OnboardingAdapter;
-import com.example.meowproj.Account.Signin;
+import com.example.meowproj.Account.LoginScreen;
 import com.example.meowproj.R;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -40,7 +40,7 @@ public class Onboarding extends AppCompatActivity {
         View.OnClickListener commonClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Onboarding.this, Signin.class);
+                Intent intent = new Intent(Onboarding.this, LoginScreen.class);
                 startActivity(intent);
             }
         };

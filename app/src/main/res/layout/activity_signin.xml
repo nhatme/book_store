@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    tools:context=".Account.Signin">
+    tools:context=".Account.LoginScreen">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -80,16 +80,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textNoSuggestions"
-                        android:maxLength="35" />
+                        android:maxLength="35"
+                        android:text="nhatneok@nhatdev2k.id.vn" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -112,7 +113,8 @@
                         android:id="@+id/id_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textNoSuggestions" />
+                        android:inputType="textNoSuggestions"
+                        android:text="tester" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

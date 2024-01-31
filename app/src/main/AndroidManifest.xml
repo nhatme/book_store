@@ -22,11 +22,11 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Account.Signin"
+            android:name=".Account.LoginScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HomeScreen.ViewPagerHome"
+            android:name=".HomeScreen.MainActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
